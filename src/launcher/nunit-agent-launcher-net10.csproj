@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>NUnit.Engine.Agents</RootNamespace>
+		<TargetFramework>net462</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<OutputPath>..\..\bin\$(Configuration)\</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\nunit.snk</AssemblyOriginatorKeyFile>
+		<Nullable>Enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="NUnit.Engine.Api" Version="$(NUnitEngineApiVersion)" />
+		<PackageReference Include="NUnit.Extensibility.Api" Version="$(NUnitExtensibilityVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="System.Runtime.Remoting" />
+	</ItemGroup>
+	
+</Project>

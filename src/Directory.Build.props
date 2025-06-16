@@ -1,0 +1,19 @@
+<!-- Top level Directory.Build.props -->
+<Project>
+
+    <PropertyGroup>
+        <!-- Compile and Build Settings -->
+        <LangVersion>12</LangVersion>
+        <Features>strict</Features>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisMode>Minimum</AnalysisMode>
+		<!-- Common Package Versions -->
+		<NUnitAgentCoreVersion>4.0.0-beta.5</NUnitAgentCoreVersion>
+		<NUnitEngineApiVersion>4.0.0-beta.8.1</NUnitEngineApiVersion>
+		<NUnitExtensibilityVersion>4.0.0-beta.4.1</NUnitExtensibilityVersion>
+		<NUnitFrameworkVersion>4.3.2</NUnitFrameworkVersion>
+		<NUnitLiteVersion>4.3.2</NUnitLiteVersion>
+	</PropertyGroup>
+
+</Project>
