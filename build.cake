@@ -10,7 +10,8 @@ BuildSettings.Initialize
     solutionFile: "net90-pluggable-agent.sln",
     unitTests: "**/*.tests.exe",
     githubOwner: "NUnit",
-    githubRepository: "net90-pluggable-agent"
+    githubRepository: "net90-pluggable-agent",
+    exemptFiles: new[] { "ProcessUtils.cs" }
 );
 
 var PackageTests = new PackageTest[] {
@@ -133,7 +134,7 @@ BuildSettings.Packages.Add(new NuGetPackage(
     {
         HasFiles("LICENSE.txt", "README.md", "nunit_256.png"),
         HasDirectory("tools").WithFiles(
-            "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll", "nunit.agent.core.dll"),
+            "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll"),
         HasDirectory("tools/agent").WithFiles(
             "nunit-agent-net90.dll", "nunit.engine.api.dll", "nunit.common.dll", 
             "nunit.extensibility.api.dll", "nunit.extensibility.dll", "nunit.agent.core.dll",
@@ -150,7 +151,7 @@ BuildSettings.Packages.Add(new ChocolateyPackage(
     {
         HasDirectory("tools").WithFiles(
             "LICENSE.txt", "README.md", "nunit_256.png", "VERIFICATION.txt",
-            "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll", "nunit.agent.core.dll"),
+            "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll"),
         HasDirectory("tools/agent").WithFiles(
             "nunit-agent-net90.dll", "nunit.engine.api.dll", "nunit.common.dll",
             "nunit.extensibility.api.dll", "nunit.extensibility.dll", "nunit.agent.core.dll",
