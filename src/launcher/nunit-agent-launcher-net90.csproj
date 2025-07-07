@@ -9,10 +9,12 @@
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>..\nunit.snk</AssemblyOriginatorKeyFile>
+		<Nullable>Enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="NUnit.Agent.Core" Version="4.0.0-alpha.22" />
+		<PackageReference Include="NUnit.Engine.Api" Version="4.0.0-alpha.22" />
+		<PackageReference Include="NUnit.Extensibility.Api" Version="4.0.0-alpha.22" />
 	</ItemGroup>
 
 	<ItemGroup>
