@@ -13,8 +13,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NUnit.Engine.Api" Version="4.0.0-alpha.22" />
-		<PackageReference Include="NUnit.Extensibility.Api" Version="4.0.0-alpha.22" />
+		<PackageReference Include="NUnit.Engine.Api" Version="4.0.0-beta.1.1" />
+		<PackageReference Include="NUnit.Extensibility.Api" Version="4.0.0-beta.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>
