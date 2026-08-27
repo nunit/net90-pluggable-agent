@@ -1,0 +1,29 @@
+<Solution>
+  <Folder Name="/SolutionItems/">
+    <File Path=".gitignore" />
+    <File Path="build.cake" />
+    <File Path="GitReleaseManager.yaml" />
+    <File Path="GitVersion.yml" />
+    <File Path="LICENSE.txt" />
+    <File Path="NuGet.config" />
+    <File Path="nunit_256.png" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/SolutionItems/.github/" />
+  <Folder Name="/SolutionItems/.github/workflows/">
+    <File Path=".github/workflows/Net90PluggableAgent.yml" />
+  </Folder>
+  <Folder Name="/SolutionItems/choco/">
+    <File Path="choco/net10-pluggable-agent.nuspec" />
+    <File Path="choco/VERIFICATION.txt" />
+  </Folder>
+  <Folder Name="/SolutionItems/nuget/">
+    <File Path="nuget/Net10PluggableAgent.nuspec" />
+  </Folder>
+  <Project Path="src/agent/nunit-agent-net10.csproj" />
+  <Project Path="src/launcher/nunit-agent-launcher-net10.csproj" />
+  <Project Path="src/testdata/aspnetcore-test/aspnetcore-test.csproj" />
+  <Project Path="src/testdata/mock-assembly/mock-assembly.csproj" />
+  <Project Path="src/testdata/windows-test/windows-test.csproj" />
+  <Project Path="src/tests/nunit-agent-launcher-net10.tests.csproj" />
+</Solution>
