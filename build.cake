@@ -7,7 +7,7 @@ BuildSettings.Initialize
 (
     context: Context,
     title: "Net10PluggableAgent",
-    solutionFile: "net10-pluggable-agent.sln",
+    solutionFile: "net10-pluggable-agent.slnx",
     unitTests: "**/*.tests.exe",
     githubOwner: "NUnit",
     githubRepository: "net10-pluggable-agent",
