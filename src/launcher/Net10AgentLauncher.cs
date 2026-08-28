@@ -57,7 +57,7 @@ namespace NUnit.Engine.Agents
             bool runAsX86 = settings.GetValueOrDefault(SettingDefinitions.RunAsX86);
             bool debugTests = settings.GetValueOrDefault(SettingDefinitions.DebugTests);
             bool debugAgent = settings.GetValueOrDefault(SettingDefinitions.DebugAgent);
-            string traceLevel = settings.GetValueOrDefault(SettingDefinitions.InternalTraceLevel);
+            string traceLevel = settings.GetValueOrDefault(SettingDefinitions.InternalTraceLevel) ?? "Warning";
             bool loadUserProfile = settings.GetValueOrDefault(SettingDefinitions.LoadUserProfile);
             string workDirectory = settings.GetValueOrDefault(SettingDefinitions.WorkDirectory);
 
@@ -65,8 +65,7 @@ namespace NUnit.Engine.Agents
 
             // Set options that need to be in effect before the package
             // is loaded by using the command line.
-            if (traceLevel != "Off")
-                sb.Append(" --trace=").EscapeProcessArgument(traceLevel);
+            sb.Append(" --trace=").EscapeProcessArgument(traceLevel);
             if (debugAgent)
                 sb.Append(" --debug-agent");
             if (debugTests)
