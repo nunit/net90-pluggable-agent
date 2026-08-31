@@ -1,16 +1,16 @@
 // Load the recipe
-#load nuget:?package=NUnit.Cake.Recipe&version=2.0.0-beta.4.11
+#load nuget:?package=NUnit.Cake.Recipe&version=2.0.0-beta.4.12 
 // Comment out above line and uncomment below for local tests of recipe changes
 //#load ../NUnit.Cake.Recipe/recipe/*.cake
 
 BuildSettings.Initialize
 (
     context: Context,
-    title: "Net10PluggableAgent",
-    solutionFile: "net10-pluggable-agent.slnx",
+    title: "Net90PluggableAgent",
+    solutionFile: "net90-pluggable-agent.slnx",
     unitTests: "**/*.tests.exe",
     githubOwner: "NUnit",
-    githubRepository: "net10-pluggable-agent",
+    githubRepository: "net90-pluggable-agent",
     exemptFiles: new[] { "ProcessUtils.cs" }
 );
 
@@ -128,36 +128,36 @@ var PackageTests = new PackageTest[] {
 };
 
 BuildSettings.Packages.Add(new NuGetPackage(
-    id: "NUnit.Extension.Net10PluggableAgent",
-    source: BuildSettings.NuGetDirectory + "Net10PluggableAgent.nuspec",
+    id: "NUnit.Extension.Net90PluggableAgent",
+    source: BuildSettings.NuGetDirectory + "Net90PluggableAgent.nuspec",
     checks: new PackageCheck[]
     {
         HasFiles("LICENSE.txt", "README.md", "nunit_256.png"),
         HasDirectory("tools").WithFiles(
-            "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll"),
+            "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll"),
         HasDirectory("tools/agent").WithFiles(
-            "nunit-agent-net10.dll", "nunit.engine.api.dll", "nunit.common.dll", 
+            "nunit-agent-net90.dll", "nunit.engine.api.dll", "nunit.common.dll", 
             "nunit.extensibility.api.dll", "nunit.extensibility.dll", "nunit.agent.core.dll",
             "TestCentric.Metadata.dll", "Microsoft.Extensions.DependencyModel.dll")
     },
-    testRunner: new AgentRunner(BuildSettings.NuGetTestDirectory + "NUnit.Extension.Net10PluggableAgent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net10.dll"),
+    testRunner: new AgentRunner(BuildSettings.NuGetTestDirectory + "NUnit.Extension.Net90PluggableAgent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net90.dll"),
     tests: PackageTests
     ));
 
 BuildSettings.Packages.Add(new ChocolateyPackage(
-    "nunit-extension-net10-pluggable-agent",
-    source: BuildSettings.ChocolateyDirectory + "net10-pluggable-agent.nuspec",
+    "nunit-extension-net90-pluggable-agent",
+    source: BuildSettings.ChocolateyDirectory + "net90-pluggable-agent.nuspec",
     checks: new PackageCheck[]
     {
         HasDirectory("tools").WithFiles(
             "LICENSE.txt", "README.md", "nunit_256.png", "VERIFICATION.txt",
-            "nunit-agent-launcher-net10.dll", "nunit.engine.api.dll"),
+            "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll"),
         HasDirectory("tools/agent").WithFiles(
-            "nunit-agent-net10.dll", "nunit.engine.api.dll", "nunit.common.dll",
+            "nunit-agent-net90.dll", "nunit.engine.api.dll", "nunit.common.dll",
             "nunit.extensibility.api.dll", "nunit.extensibility.dll", "nunit.agent.core.dll",
             "TestCentric.Metadata.dll", "Microsoft.Extensions.DependencyModel.dll")
     },
-    testRunner: new AgentRunner(BuildSettings.ChocolateyTestDirectory + "nunit-extension-net10-pluggable-agent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net10.dll"),
+    testRunner: new AgentRunner(BuildSettings.ChocolateyTestDirectory + "nunit-extension-net90-pluggable-agent." + BuildSettings.PackageVersion + "/tools/agent/nunit-agent-net90.dll"),
     tests: PackageTests));
 
 //////////////////////////////////////////////////////////////////////

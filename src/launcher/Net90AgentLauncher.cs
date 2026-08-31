@@ -16,7 +16,7 @@ namespace NUnit.Engine.Agents
     [Extension(Description = "Pluggable agent running tests under .NET 10.0", ExtensibilityVersion = "4.0.0")]
     [ExtensionProperty("AgentType", "LocalProcess")]
     [ExtensionProperty("TargetFramework", ".NETCoreApp,Version=10.0")]
-    public class Net10AgentLauncher : IAgentLauncher
+    public class Net90AgentLauncher : IAgentLauncher
     {
         private static readonly string LAUNCHER_DIR = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -24,7 +24,7 @@ namespace NUnit.Engine.Agents
         private static readonly Version RUNTIME_VERSION = new Version(10, 0, 0);
         private static readonly FrameworkName TARGET_FRAMEWORK = new FrameworkName(RUNTIME_IDENTIFIER, RUNTIME_VERSION);
 
-        protected string AgentPath => Path.Combine(LAUNCHER_DIR, $"agent/nunit-agent-net10.dll");
+        protected string AgentPath => Path.Combine(LAUNCHER_DIR, $"agent/nunit-agent-net90.dll");
 
         public TestAgentInfo AgentInfo => new TestAgentInfo(
             GetType().Name,

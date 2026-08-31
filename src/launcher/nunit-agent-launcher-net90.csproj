@@ -13,8 +13,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NUnit.Engine.Api" Version="$(NUnitEngineApiVersion)" />
-		<PackageReference Include="NUnit.Extensibility.Api" Version="$(NUnitExtensibilityVersion)" />
+		<PackageReference Include="NUnit.Engine.Api" />
+		<PackageReference Include="NUnit.Extensibility.Api" />
 	</ItemGroup>
 
 	<ItemGroup>

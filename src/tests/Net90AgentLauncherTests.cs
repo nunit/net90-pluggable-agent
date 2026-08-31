@@ -9,11 +9,11 @@ using NUnit.Framework;
 
 namespace NUnit.Engine.Agents
 {
-    public class Net10AgentLauncherTests
+    public class Net90AgentLauncherTests
     {
         private static readonly Guid AGENTID = Guid.NewGuid();
         private const string AGENCY_URL = "tcp://127.0.0.1:1234/TestAgency";
-        private const string AGENT_NAME = "nunit-agent-net10.dll";
+        private const string AGENT_NAME = "nunit-agent-net90.dll";
         private static string AGENT_DIR = Path.Combine(TestContext.CurrentContext.TestDirectory, "agent");
         private static string TESTS_DIR = Path.Combine(TestContext.CurrentContext.TestDirectory, "tests");
 
@@ -37,7 +37,7 @@ namespace NUnit.Engine.Agents
         private const string NET90 = $"{NETCORE},Version=9.0";
         private const string NET10 = $"{NETCORE},Version=10.0";
 
-        private const string TARGET_RUNTIME_FRAMEWORK = NET10;
+        private const string TARGET_RUNTIME_FRAMEWORK = NET90;
         private const string RUN_AS_X86 = "RunAsX86";
         private const string DEBUG_AGENT = "DebugAgent";
         private const string TRACE_LEVEL = "InternalTraceLevel";
@@ -57,13 +57,13 @@ namespace NUnit.Engine.Agents
             NETCORE11, NETCORE21, NETCORE31, NET50, NET60, NET70, NET80, NET90, NET10
         };
 
-        private Net10AgentLauncher _launcher;
+        private Net90AgentLauncher _launcher;
         private TestPackage _package;
 
         [SetUp]
         public void SetUp()
         {
-            _launcher = new Net10AgentLauncher();
+            _launcher = new Net90AgentLauncher();
             _package = new TestPackage("junk.dll");
         }
 
@@ -101,7 +101,8 @@ namespace NUnit.Engine.Agents
             }
             else
             {
-                Assert.That(() => _launcher.CreateAgent(AGENTID, AGENCY_URL, _package), Throws.ArgumentException);
+                var action = () => _launcher.CreateAgent(AGENTID, AGENCY_URL, _package);
+                Assert.That(action, Throws.ArgumentException);
             }
         }
 
@@ -127,7 +128,8 @@ namespace NUnit.Engine.Agents
             }
             else
             {
-                Assert.That(() => _launcher.CreateAgent(AGENTID, AGENCY_URL, _package), Throws.ArgumentException);
+                var action = () => _launcher.CreateAgent(AGENTID, AGENCY_URL, _package);
+                Assert.That(action, Throws.ArgumentException);
             }
         }
 
@@ -143,7 +145,7 @@ namespace NUnit.Engine.Agents
             Assert.That(startInfo.WorkingDirectory, Is.EqualTo(Environment.CurrentDirectory));
 
             var arguments = startInfo.Arguments;
-            Assert.That(arguments, Does.Not.Contain("--trace="));
+            Assert.That(arguments, Does.Contain("--trace=Warning"));
             Assert.That(arguments, Does.Not.Contain("--debug-agent"));
             Assert.That(arguments, Does.Not.Contain("--work="));
         }
@@ -204,7 +206,8 @@ namespace NUnit.Engine.Agents
             };
 
             Console.WriteLine("Launching agent for direct execution");
-            Assert.That(() => agentProcess.Start(), Throws.Nothing);
+            var action = () => agentProcess.Start();
+            Assert.That(action, Throws.Nothing);
             agentProcess.BeginOutputReadLine();
             Assert.That(agentProcess.WaitForExit(5000), "Agent failed to terminate");
             Assert.That(agentProcess.ExitCode, Is.EqualTo(0));
