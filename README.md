@@ -1,1 +1,1 @@
-# NUnit .NET 8.0 Pluggable Agent
+# NUnit .NET 9.0 Pluggable Agent
