@@ -13,10 +13,6 @@
 	</PropertyGroup>
   
 	<ItemGroup>
-		<Reference Include="System.Runtime.Remoting" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\launcher\nunit-agent-launcher-net90.csproj" />
 	</ItemGroup>
 
