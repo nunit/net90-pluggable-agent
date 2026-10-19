@@ -12,7 +12,7 @@
   </Folder>
   <Folder Name="/SolutionItems/.github/" />
   <Folder Name="/SolutionItems/.github/workflows/">
-    <File Path=".github/workflows/Net10PluggableAgent.yml" />
+    <File Path=".github/workflows/Net90PluggableAgent.yml" />
   </Folder>
   <Folder Name="/SolutionItems/choco/">
     <File Path="choco/net90-pluggable-agent.nuspec" />

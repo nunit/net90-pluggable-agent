@@ -1,4 +1,4 @@
-﻿name: Net10PluggableAgent.CI
+﻿name: Net90PluggableAgent.CI
 
 on:
   workflow_dispatch:
