@@ -78,7 +78,7 @@ namespace NUnit.Common
                 ? $"The X86 version of {executableName} is not installed."
                 : $"Unable to locate {executableName}.";
 
-            throw new Exception(msg);
+            throw new FileNotFoundException(msg);
         }
     }
 }
