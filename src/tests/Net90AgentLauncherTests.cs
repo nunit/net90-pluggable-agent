@@ -54,7 +54,7 @@ namespace NUnit.Engine.Agents
         };
 
         private static readonly string[] SUPPORTED = new string[] {
-            NETCORE11, NETCORE21, NETCORE31, NET50, NET60, NET70, NET80, NET90, NET10
+            NETCORE11, NETCORE21, NETCORE31, NET50, NET60, NET70, NET80, NET90
         };
 
         private Net90AgentLauncher _launcher;
@@ -65,6 +65,14 @@ namespace NUnit.Engine.Agents
         {
             _launcher = new Net90AgentLauncher();
             _package = new TestPackage("junk.dll");
+        }
+
+        /// <summary>Advertises the runtime actually targeted by the .NET 9 agent executable.</summary>
+        [Test]
+        public void AgentInfoReportsNet9Runtime()
+        {
+            Assert.That(_launcher.AgentInfo.TargetRuntime.Identifier, Is.EqualTo(NETCORE));
+            Assert.That(_launcher.AgentInfo.TargetRuntime.Version, Is.EqualTo(new Version(9, 0, 0)));
         }
 
         [TestCaseSource(nameof(RUNTIMES))]
