@@ -1,6 +1,5 @@
 ﻿// Copyright (c) Charlie Poole, Rob Prouse and Contributors. MIT License - see LICENSE.txt
 
-#if NETFRAMEWORK
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -18,13 +17,13 @@ namespace NUnit.Engine.Agents
     [ExtensionProperty("TargetFramework", ".NETCoreApp,Version=9.0")]
     public class Net90AgentLauncher : IAgentLauncher
     {
-        private static readonly string LAUNCHER_DIR = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private static readonly string LAUNCHER_DIR = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
 
         private const string RUNTIME_IDENTIFIER = ".NETCoreApp";
         private static readonly Version RUNTIME_VERSION = new Version(9, 0, 0);
         private static readonly FrameworkName TARGET_FRAMEWORK = new FrameworkName(RUNTIME_IDENTIFIER, RUNTIME_VERSION);
 
-        protected string AgentPath => Path.Combine(LAUNCHER_DIR, $"agent/nunit-agent-net90.dll");
+        protected static string AgentPath => Path.Combine(LAUNCHER_DIR, $"agent/nunit-agent-net90.dll");
 
         public TestAgentInfo AgentInfo => new TestAgentInfo(
             GetType().Name,
@@ -61,7 +60,11 @@ namespace NUnit.Engine.Agents
             bool loadUserProfile = settings.GetValueOrDefault(SettingDefinitions.LoadUserProfile);
             string workDirectory = settings.GetValueOrDefault(SettingDefinitions.WorkDirectory);
 
+#if NETFRAMEWORK
             var sb = new StringBuilder($"--agentId={agentId} --agencyUrl={agencyUrl} --pid={Process.GetCurrentProcess().Id}");
+#else
+            var sb = new StringBuilder($"--agentId={agentId} --agencyUrl={agencyUrl} --pid={Environment.ProcessId}");
+#endif
 
             // Set options that need to be in effect before the package
             // is loaded by using the command line.
@@ -79,7 +82,8 @@ namespace NUnit.Engine.Agents
             startInfo.UseShellExecute = false;
             startInfo.CreateNoWindow = true;
             startInfo.WorkingDirectory = Environment.CurrentDirectory;
-            startInfo.LoadUserProfile = loadUserProfile;
+            if (Platform.IsWindows)
+                startInfo.LoadUserProfile = loadUserProfile;
 
             startInfo.FileName = DotNet.GetDotNetExe(runAsX86);
             startInfo.Arguments = $"\"{AgentPath}\" {arguments}";
@@ -88,4 +92,3 @@ namespace NUnit.Engine.Agents
         }
     }
 }
-#endif

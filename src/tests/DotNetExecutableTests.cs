@@ -39,9 +39,13 @@ namespace NUnit.Engine.Agents
 
             // Isolate the helper's cached install directories from other launcher tests.
             var assembly = Assembly.Load(File.ReadAllBytes(typeof(DotNet).Assembly.Location));
-            _getExecutable = (Func<bool, string>)assembly.GetType(typeof(DotNet).FullName!)!
-                .GetMethod(nameof(DotNet.GetDotNetExe))!
-                .CreateDelegate(typeof(Func<bool, string>));
+            var methodInfo = assembly.GetType(typeof(DotNet).FullName!)!
+                .GetMethod(nameof(DotNet.GetDotNetExe), BindingFlags.Public | BindingFlags.Static)!;
+#if NETFRAMEWORK
+            _getExecutable = (Func<bool, string>)methodInfo.CreateDelegate(typeof(Func<bool, string>));
+#else
+            _getExecutable = methodInfo.CreateDelegate<Func<bool, string>>();
+#endif
         }
 
         /// <summary>Restores the original environment and removes the temporary roots.</summary>
