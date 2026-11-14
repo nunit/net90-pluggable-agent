@@ -117,7 +117,7 @@ namespace NUnit.Engine.Agents
         private static void CheckAgentPath(Process process, bool x86)
         {
             Assert.That(process.StartInfo.FileName, Does.EndWith(Platform.IsWindows ? "dotnet.exe" : "dotnet"));
-            string agentPath = Path.Combine(AGENT_DIR, AGENT_NAME).Replace(ALT, SEP);
+            string agentPath = Path.GetFullPath(Path.Combine(AGENT_DIR, AGENT_NAME)).Replace(ALT, SEP);
             Assert.That(process.StartInfo.Arguments.Replace(ALT, SEP), Does.StartWith($"\"{agentPath}\""));
             Assert.That(File.Exists(agentPath), $"No agent at {agentPath}");
         }
