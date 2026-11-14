@@ -23,7 +23,7 @@ namespace NUnit.Engine.Agents
         private static readonly Version RUNTIME_VERSION = new Version(9, 0, 0);
         private static readonly FrameworkName TARGET_FRAMEWORK = new FrameworkName(RUNTIME_IDENTIFIER, RUNTIME_VERSION);
 
-        protected static string AgentPath => Path.Combine(LAUNCHER_DIR, $"agent/nunit-agent-net90.dll");
+        protected static string AgentPath => Path.Combine(LAUNCHER_DIR, $"../agent/nunit-agent-net90.dll");
 
         public TestAgentInfo AgentInfo => new TestAgentInfo(
             GetType().Name,

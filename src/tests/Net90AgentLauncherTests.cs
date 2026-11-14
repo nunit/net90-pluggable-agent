@@ -14,7 +14,7 @@ namespace NUnit.Engine.Agents
         private static readonly Guid AGENTID = Guid.NewGuid();
         private const string AGENCY_URL = "tcp://127.0.0.1:1234/TestAgency";
         private const string AGENT_NAME = "nunit-agent-net90.dll";
-        private static string AGENT_DIR = Path.Combine(TestContext.CurrentContext.TestDirectory, "agent");
+        private static string AGENT_DIR = Path.Combine(TestContext.CurrentContext.TestDirectory, "../agent");
         private static string TESTS_DIR = Path.Combine(TestContext.CurrentContext.TestDirectory, "tests");
 
         // Constants used for settings
@@ -119,6 +119,7 @@ namespace NUnit.Engine.Agents
             Assert.That(process.StartInfo.FileName, Does.EndWith(Platform.IsWindows ? "dotnet.exe" : "dotnet"));
             string agentPath = Path.Combine(AGENT_DIR, AGENT_NAME).Replace(ALT, SEP);
             Assert.That(process.StartInfo.Arguments.Replace(ALT, SEP), Does.StartWith($"\"{agentPath}\""));
+            Assert.That(File.Exists(agentPath), $"No agent at {agentPath}");
         }
 
         [TestCaseSource(nameof(RUNTIMES))]
