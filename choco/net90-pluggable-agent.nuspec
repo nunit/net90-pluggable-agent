@@ -27,8 +27,7 @@
     <file src="../Readme.md" target="tools" />
 	<file src="../nunit_256.png" target="tools" />
 	<file src="VERIFICATION.txt" target="tools" />
-    <file src="../bin/Release/nunit-agent-launcher-net90.dll" target="tools" />
-    <file src="../bin/Release/nunit.engine.api.dll" target="tools" />
+	  
 	<file src="../bin/Release/agent/nunit-agent-net90.dll" target="tools/agent" />
 	<file src="../bin/Release/agent/nunit-agent-net90.deps.json" target="tools/agent" />
 	<file src="../bin/Release/agent/nunit-agent-net90.runtimeconfig.json" target="tools/agent" />
@@ -39,5 +38,11 @@
 	<file src="../bin/Release/agent/TestCentric.Metadata.dll" target="tools/agent" />
 	<file src="../bin/Release/agent/nunit.agent.core.dll" target="tools/agent" />
 	<file src="../bin/Release/agent/Microsoft.Extensions.DependencyModel.dll" target="tools/agent" />
+
+	<file src="../bin/Release/net462/nunit-agent-launcher-net90.dll" target="tools/net462" />
+	<file src="../bin/Release/net462/nunit.engine.api.dll" target="tools/net462" />
+
+	<file src="../bin/Release/net10.0/nunit-agent-launcher-net90.dll" target="tools/net10.0" />
+	<file src="../bin/Release/net10.0/nunit.engine.api.dll" target="tools/net10.0" />
   </files>
 </package>

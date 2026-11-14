@@ -9,6 +9,7 @@
     <File Path="NuGet.config" />
     <File Path="nunit_256.png" />
     <File Path="README.md" />
+    <File Path="src/Directory.Build.props" />
   </Folder>
   <Folder Name="/SolutionItems/.github/" />
   <Folder Name="/SolutionItems/.github/workflows/">

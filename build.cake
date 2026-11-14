@@ -1,5 +1,5 @@
 // Load the recipe
-#load nuget:?package=NUnit.Cake.Recipe&version=2.0.0-beta.5
+#load nuget:?package=NUnit.Cake.Recipe&version=2.0.0-beta.5.9
 // Comment out above line and uncomment below for local tests of recipe changes
 //#load ../NUnit.Cake.Recipe/recipe/*.cake
 
@@ -15,16 +15,6 @@ BuildSettings.Initialize
 );
 
 var PackageTests = new PackageTest[] {
-    new PackageTest(1, "NetCore31PackageTest")
-    {
-        Description = "Run mock-assembly.dll targeting .NET Core 3.1",
-        Arguments = "testdata/netcoreapp3.1/mock-assembly.dll",
-        ExpectedResult = new ExpectedResult("Failed")
-        {
-            Total = 35, Passed = 21, Failed = 5, Warnings = 1, Inconclusive = 1, Skipped = 7,
-            Assemblies = new ExpectedAssemblyResult[] { new ExpectedAssemblyResult("mock-assembly.dll") }
-        }
-    },
     new PackageTest(1, "Net60PackageTest")
     {
         Description = "Run mock-assembly.dll targeting .NET 6.0",
@@ -133,7 +123,9 @@ BuildSettings.Packages.Add(new NuGetPackage(
     checks: new PackageCheck[]
     {
         HasFiles("LICENSE.txt", "README.md", "nunit_256.png"),
-        HasDirectory("tools").WithFiles(
+        HasDirectory("tools/net462").WithFiles(
+            "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll"),
+        HasDirectory("tools/net10.0").WithFiles(
             "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll"),
         HasDirectory("tools/agent").WithFiles(
             "nunit-agent-net90.dll", "nunit.engine.api.dll", "nunit.common.dll", 
@@ -150,7 +142,10 @@ BuildSettings.Packages.Add(new ChocolateyPackage(
     checks: new PackageCheck[]
     {
         HasDirectory("tools").WithFiles(
-            "LICENSE.txt", "README.md", "nunit_256.png", "VERIFICATION.txt",
+            "LICENSE.txt", "README.md", "nunit_256.png", "VERIFICATION.txt"),
+        HasDirectory("tools/net462").WithFiles(
+            "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll"),
+        HasDirectory("tools/net10.0").WithFiles(
             "nunit-agent-launcher-net90.dll", "nunit.engine.api.dll"),
         HasDirectory("tools/agent").WithFiles(
             "nunit-agent-net90.dll", "nunit.engine.api.dll", "nunit.common.dll",
