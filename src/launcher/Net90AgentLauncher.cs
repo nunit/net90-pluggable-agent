@@ -24,8 +24,29 @@ namespace NUnit.Engine.Agents
         private static readonly FrameworkName TARGET_FRAMEWORK = new FrameworkName(RUNTIME_IDENTIFIER, RUNTIME_VERSION);
 
         /// <summary>Gets the sibling agent without unresolved segments in extended Windows paths.</summary>
-        protected static string AgentPath => Path.Combine(
-            Path.GetDirectoryName(LAUNCHER_DIR) ?? LAUNCHER_DIR, "agent", "nunit-agent-net90.dll");
+        protected static string AgentPath => GetAgentPath(LAUNCHER_DIR);
+
+        /// <summary>Resolves the installed agent or reports the missing part of its package layout.</summary>
+        /// <param name="launcherDirectory">The directory containing the launcher assembly.</param>
+        /// <returns>The canonical path to the existing sibling agent assembly.</returns>
+        /// <exception cref="DirectoryNotFoundException">The parent or agent directory is unavailable.</exception>
+        /// <exception cref="FileNotFoundException">The sibling agent assembly is unavailable.</exception>
+        private static string GetAgentPath(string launcherDirectory)
+        {
+            string? parent = Path.GetDirectoryName(launcherDirectory);
+            if (parent is null || !Directory.Exists(parent))
+                throw new DirectoryNotFoundException($"Unable to locate parent directory for agent launcher '{launcherDirectory}'.");
+
+            string agentDirectory = Path.Combine(parent, "agent");
+            if (!Directory.Exists(agentDirectory))
+                throw new DirectoryNotFoundException($"Unable to locate agent directory '{agentDirectory}'.");
+
+            string agentPath = Path.Combine(agentDirectory, "nunit-agent-net90.dll");
+            if (!File.Exists(agentPath))
+                throw new FileNotFoundException($"Unable to locate agent assembly '{agentPath}'.", agentPath);
+
+            return agentPath;
+        }
 
         public TestAgentInfo AgentInfo => new TestAgentInfo(
             GetType().Name,
@@ -47,6 +68,8 @@ namespace NUnit.Engine.Agents
             // Should not be called unless we have previously checked CanCreateAgent
             if (!CanCreateAgent(package))
                 throw new ArgumentException("Unable to create agent. Check result of CanCreateAgent before calling CreateAgent.", nameof(package));
+
+            string agentPath = AgentPath;
 
             var process = new Process()
             {
@@ -88,7 +111,7 @@ namespace NUnit.Engine.Agents
                 startInfo.LoadUserProfile = loadUserProfile;
 
             startInfo.FileName = DotNet.GetDotNetExe(runAsX86);
-            startInfo.Arguments = $"\"{AgentPath}\" {arguments}";
+            startInfo.Arguments = $"\"{agentPath}\" {arguments}";
 
             return process;
         }

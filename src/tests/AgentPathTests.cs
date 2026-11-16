@@ -57,6 +57,81 @@ namespace NUnit.Engine.Agents
         }
 #endif
 
+        /// <summary>A root cannot contain the launcher's required sibling agent directory.</summary>
+        [Test]
+        public void RejectsLauncherAtFileSystemRoot()
+        {
+            string directory = Path.GetPathRoot(TestContext.CurrentContext.TestDirectory)!;
+            var error = PathError(directory);
+            Assert.That(error, Is.TypeOf<DirectoryNotFoundException>());
+            Assert.That(error.Message, Does.Contain("parent directory").And.Contain(directory));
+        }
+
+        /// <summary>A nonexistent parent must be reported instead of producing a guessed path.</summary>
+        [Test]
+        public void RejectsMissingParentDirectory()
+        {
+            string parent = Path.Combine(Path.GetTempPath(), "NUnitMissingAgentParent", Guid.NewGuid().ToString("N"));
+            var error = PathError(Path.Combine(parent, "launcher"));
+            Assert.That(error, Is.TypeOf<DirectoryNotFoundException>());
+            Assert.That(error.Message, Does.Contain("parent directory").And.Contain(parent));
+        }
+
+        /// <summary>An incomplete package identifies its missing agent directory.</summary>
+        [Test]
+        public void RejectsMissingAgentDirectory()
+        {
+            string root = Path.Combine(Path.GetTempPath(), "NUnitAgentLayoutTests", Guid.NewGuid().ToString("N"));
+            string launcher = Path.Combine(root, "launcher");
+            Directory.CreateDirectory(launcher);
+            try
+            {
+                var error = PathError(launcher);
+                Assert.That(error, Is.TypeOf<DirectoryNotFoundException>());
+                Assert.That(error.Message, Does.Contain("agent directory").And.Contain(Path.Combine(root, "agent")));
+            }
+            finally
+            {
+                Directory.Delete(launcher);
+                Directory.Delete(root);
+            }
+        }
+
+        /// <summary>An incomplete agent directory identifies the exact missing assembly.</summary>
+        [Test]
+        public void RejectsMissingAgentAssembly()
+        {
+            string root = Path.Combine(Path.GetTempPath(), "NUnitAgentLayoutTests", Guid.NewGuid().ToString("N"));
+            string launcher = Path.Combine(root, "launcher");
+            string agent = Path.Combine(root, "agent");
+            Directory.CreateDirectory(launcher);
+            Directory.CreateDirectory(agent);
+            try
+            {
+                var error = PathError(launcher);
+                Assert.That(error, Is.TypeOf<FileNotFoundException>());
+                string expected = Path.Combine(agent, "nunit-agent-net90.dll");
+                Assert.That(((FileNotFoundException)error).FileName, Is.EqualTo(expected));
+                Assert.That(error.Message, Does.Contain(expected));
+            }
+            finally
+            {
+                Directory.Delete(agent);
+                Directory.Delete(launcher);
+                Directory.Delete(root);
+            }
+        }
+
+        private static Exception PathError(string launcherDirectory)
+        {
+            Action action = () =>
+            {
+                typeof(Net90AgentLauncher).GetMethod("GetAgentPath", BindingFlags.NonPublic | BindingFlags.Static)!
+                    .Invoke(null, new object[] { launcherDirectory });
+            };
+            return Assert.Throws<TargetInvocationException>(action)!.InnerException!;
+        }
+
         private static string ReadAgentPath(Type launcher) =>
             (string)launcher.GetProperty("AgentPath", BindingFlags.NonPublic | BindingFlags.Static)!.GetValue(null)!;
     }
