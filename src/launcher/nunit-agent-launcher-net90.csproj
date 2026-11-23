@@ -14,5 +14,5 @@
 		<PackageReference Include="NUnit.Engine.Api" />
 		<PackageReference Include="NUnit.Extensibility.Api" />
 	</ItemGroup>
-	
+
 </Project>
