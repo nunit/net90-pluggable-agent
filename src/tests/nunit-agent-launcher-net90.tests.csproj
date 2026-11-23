@@ -18,10 +18,4 @@
 		<PackageReference Include="NUnit.Engine.Api" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Update="app.config">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
 </Project>

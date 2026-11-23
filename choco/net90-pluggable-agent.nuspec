@@ -9,40 +9,40 @@
     <owners>Charlie Poole</owners>
     <copyright>Copyright (c) 2021-2026 Charlie Poole</copyright>
     <projectUrl>http://nunit.org</projectUrl>
-	<licenseUrl>https://raw.githubusercontent.com/nunit/net90-pluggable-agent/master/LICENSE.txt</licenseUrl>
-	<requireLicenseAcceptance>false</requireLicenseAcceptance>
-	<iconUrl>https://cdn.rawgit.com/nunit/resources/master/images/icon/nunit_256.png</iconUrl>
-	<language>en-US</language>
+    <licenseUrl>https://raw.githubusercontent.com/nunit/net90-pluggable-agent/master/LICENSE.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://cdn.rawgit.com/nunit/resources/master/images/icon/nunit_256.png</iconUrl>
+    <language>en-US</language>
     <projectSourceUrl>https://github.com/nunit/net90-pluggable-agent</projectSourceUrl>
     <packageSourceUrl>https://github.com/nunit/net90-pluggable-agent</packageSourceUrl>
     <docsUrl>https://nunit.org</docsUrl>
     <mailingListUrl>https://groups.google.com/forum/#!forum/nunit-discuss</mailingListUrl>
-    <bugTrackerUrl>https://github.com/nunit/net10-pluggable-agent/issues</bugTrackerUrl>
-    <tags>nunit extension pluggable agent net9.0</tags>
-    <summary>NUnit Engine extension for running tests under .NET 9.0</summary>
-    <description>This extension allow the NUnit engine to run tests under .NET 9.0.</description>
+    <bugTrackerUrl>https://github.com/nunit/net90-pluggable-agent/issues</bugTrackerUrl>
+    <tags>nunit extension pluggable agent net90</tags>
+    <summary>NUnit Engine extension for running tests under .NET 9.0.</summary>
+    <description>This extension allows the NUnit engine to run tests under .NET 9.0.</description>
   </metadata>
   <files>
     <file src="../LICENSE.txt" target="tools" />
     <file src="../Readme.md" target="tools" />
-	<file src="../nunit_256.png" target="tools" />
-	<file src="VERIFICATION.txt" target="tools" />
-	  
-	<file src="../bin/Release/agent/nunit-agent-net90.dll" target="tools/agent" />
-	<file src="../bin/Release/agent/nunit-agent-net90.deps.json" target="tools/agent" />
-	<file src="../bin/Release/agent/nunit-agent-net90.runtimeconfig.json" target="tools/agent" />
-	<file src="../bin/Release/agent/nunit.engine.api.dll" target="tools/agent" />
-	<file src="../bin/Release/agent/nunit.common.dll" target="tools/agent" />
-	<file src="../bin/Release/agent/nunit.extensibility.api.dll" target="tools/agent" />
-	<file src="../bin/Release/agent/nunit.extensibility.dll" target="tools/agent" />
-	<file src="../bin/Release/agent/TestCentric.Metadata.dll" target="tools/agent" />
-	<file src="../bin/Release/agent/nunit.agent.core.dll" target="tools/agent" />
-	<file src="../bin/Release/agent/Microsoft.Extensions.DependencyModel.dll" target="tools/agent" />
+    <file src="../nunit_256.png" target="tools" />
+    <file src="VERIFICATION.txt" target="tools" />
 
-	<file src="../bin/Release/net462/nunit-agent-launcher-net90.dll" target="tools/net462" />
-	<file src="../bin/Release/net462/nunit.engine.api.dll" target="tools/net462" />
+    <file src="$BIN_DIR$agent/nunit-agent-net90.dll" target="tools/agent" />
+    <file src="$BIN_DIR$agent/nunit-agent-net90.deps.json" target="tools/agent" />
+    <file src="$BIN_DIR$agent/nunit-agent-net90.runtimeconfig.json" target="tools/agent" />
+    <file src="$BIN_DIR$agent/nunit.engine.api.dll" target="tools/agent" />
+    <file src="$BIN_DIR$agent/nunit.common.dll" target="tools/agent" />
+    <file src="$BIN_DIR$agent/nunit.extensibility.api.dll" target="tools/agent" />
+    <file src="$BIN_DIR$agent/nunit.extensibility.dll" target="tools/agent" />
+    <file src="$BIN_DIR$agent/TestCentric.Metadata.dll" target="tools/agent" />
+    <file src="$BIN_DIR$agent/nunit.agent.core.dll" target="tools/agent" />
+    <file src="$BIN_DIR$agent/Microsoft.Extensions.DependencyModel.dll" target="tools/agent" />
 
-	<file src="../bin/Release/net10.0/nunit-agent-launcher-net90.dll" target="tools/net10.0" />
-	<file src="../bin/Release/net10.0/nunit.engine.api.dll" target="tools/net10.0" />
+    <file src="$BIN_DIR$net462/nunit-agent-launcher-net90.dll" target="tools/net462" />
+    <file src="$BIN_DIR$net462/nunit.engine.api.dll" target="tools/net462" />
+
+    <file src="$BIN_DIR$net10.0/nunit-agent-launcher-net90.dll" target="tools/net10.0" />
+    <file src="$BIN_DIR$net10.0/nunit.engine.api.dll" target="tools/net10.0" />
   </files>
 </package>

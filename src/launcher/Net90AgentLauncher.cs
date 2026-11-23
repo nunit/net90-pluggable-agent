@@ -14,7 +14,7 @@ namespace NUnit.Engine.Agents
 {
     [Extension(Description = "Pluggable agent running tests under .NET 9.0", ExtensibilityVersion = "4.0.0")]
     [ExtensionProperty("AgentType", "LocalProcess")]
-    [ExtensionProperty("TargetFramework", ".NETCoreApp,Version=9.0")]
+    [ExtensionProperty("TargetFramework", ".NETCoreApp,Version=v9.0")]
     public class Net90AgentLauncher : IAgentLauncher
     {
         private static readonly string LAUNCHER_DIR = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
@@ -35,7 +35,6 @@ namespace NUnit.Engine.Agents
             // Get target runtime from package
             string runtimeSetting = package.Settings.GetValueOrDefault(SettingDefinitions.TargetFrameworkName);
             var targetRuntime = new FrameworkName(runtimeSetting);
-            bool runAsX86 = package.Settings.GetValueOrDefault(SettingDefinitions.RunAsX86);
 
             return targetRuntime.Identifier == RUNTIME_IDENTIFIER && targetRuntime.Version.Major <= RUNTIME_VERSION.Major;
         }
